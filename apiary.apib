@@ -1,17 +1,48 @@
 FORMAT: 1A
 HOST: https://api.businessbox.hu/
 
-# SalesAPI
+# BBox API dokumentáció
 
-SalesAPI is a simple interface to access BBox management functions.
+A dokumentáció a jelenleg API- keresztül elérhető BBox rendszerfunkciókat tartalmazza.
 
-# SalesAPI Root [/]
+# Általános változók és funkciók
+## Konstruktor
+
+A konstruktor feladata az alkalmazás indításához szükséges vátozók beállítása. Automatikusan hívódik meg.
+
+Az indításhoz szükséges változók:
+
+- LAST_UPDATE: globálisan van beállítva a fő konfigurációs fájlokban (production, staging, local), értéke jelenleg: 201501191236
+- $_SESSION['LAST_UPDATE']: az API funkció utolsó frissítésének ideje. Ha be van állítva és nem egyezik a config-ban lévő étrékkel, akkor nem a legfrissebb funkciókat használa a kalkulátor, tehát újra kell inicializálni a folyamatot (törölni kell a beállított tokent).
+- $token: az aktuális kalkulációs folyamathoz rendelet azonosító.
+- $_SESSION['token']: az aktuális kalkulációs folyamathoz rendelet azonosító $_SESSION-ben tárolt értéke.
+- $_SESSION['user']['loggedIn']: logikai változó a $_SESSION-ben, azt jelzi, hogy van e bejelentkezett felhasználó
+- $_SESSION['user']['level']: a bejelentkezett felhasználó típusát határozza meg. 
+    Értékei:
+    0 (title = dummy) Új vásárló
+    1 (title = user) Bejelentkezett Vásárló
+    2 (title = salesAgent) Bejelentkezett Értékesítő, viszonteladó
+- $_SESSION['user']['title']: a bejelentkezett felhasználó cimkéje
+- A konstruktorban használt funkciók:
+
+- TokenInit(): minden új folyamathoz egyedi azonosítót generál az API, ezt hajtja végre a TokenInit().
+- ApplicationInitialization(): ha sikerül tokent generálni, akkor az alkalmazás lekérdezi a kalkulátor működéséhez szükséges adatokat.
+
+# TokenInit()
++ Parameters
+    
++ Response 200 (application/json)
+    {
+        
+    }
+
+# SalesAPI Root
 
 This resource does not have any attributes. Instead it offers the initial
 API affordances in the form of the links in the JSON body.
 
 
-## Retrieve the Entry Point [POST]
+# Retrieve the Entry Point [POST]
 + Parameters
     + ip: 127.0.0.1
     + userAgent: "Firefox"
