@@ -28,14 +28,14 @@ Az indításhoz szükséges változók:
 - TokenInit(): minden új folyamathoz egyedi azonosítót generál az API, ezt hajtja végre a TokenInit().
 - ApplicationInitialization(): ha sikerül tokent generálni, akkor az alkalmazás lekérdezi a kalkulátor működéséhez szükséges adatokat.
 
-# construct
+# construct [POST]
 + Parameters
     + token: 123
     + remote: false
     
 + Response 200 (application/json)
     {
-        
+        questions_url": "/questions"
     }
 
 # SalesAPI Root
